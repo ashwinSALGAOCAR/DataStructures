@@ -12,13 +12,13 @@ class Node:
 			return False
 		elif self.data > data:
 			if self.left:
-				return self.left.insert(data)
+				self.left.insert(data)
 			else:
 				self.left = Node(data)
 				return True
 		else:
 			if self.right:
-				return self.right.insert(data)
+				self.right.insert(data)
 			else:
 				self.right = Node(data)
 				return True
@@ -26,11 +26,11 @@ class Node:
 	def search(self, data):
 		if self.data == data:
 			return self
-		elif self.data > data:
+		elif data < self.data and self.left is not None:
 			return self.left.search(data)
-		else:
+		elif data > self.data and self.right is not None:
 			return self.right.search(data)
-		return False
+		return "Node with value " + str(data) + " you're searching for not found"
 
 	def preorder(self, l):
 		l.append(self.data)
@@ -72,7 +72,7 @@ class Tree:
 		if self.root is None:
 			print("The tree is empty. Insert values to search")
 			return
-		self.root.search(data)
+		return self.root.search(data)
 
 	def preorder(self):
 		if self.root:
@@ -155,12 +155,12 @@ new_bst.insert(53)
 new_bst.insert(57)
 new_bst.insert(63)
 new_bst.insert(67)
-#print(new_bst.preorder())
+print(new_bst.preorder())
 print(new_bst.inorder())
-#print(new_bst.postorder())
+print(new_bst.postorder())
 
 #new_bst.remove(50)
 #snew_bst.remove(53)
 #new_bst.remove(55)
-print(new_bst.inorder())
-print(new_bst.search(50))
+#print(new_bst.inorder())
+print(new_bst.search(67))
