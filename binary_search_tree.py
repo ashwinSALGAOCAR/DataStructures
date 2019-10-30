@@ -32,6 +32,37 @@ class Node:
 			return self.right.search(data)
 		return "Node with value " + str(data) + " you're searching for not found"
 
+	def get_min_node(self, node):
+		current = node
+		while current.left is not None:
+			current = current.left
+		return current
+
+
+	def remove(self, data):
+		if self is None:
+			return False
+
+		if data < self.data:
+			self.left = self.left.remove(data)
+		elif data> self.data:
+			self.right = self.right.remove(data)
+		else:
+			if self.left is None:
+				temp = self.right
+				self = None
+				return temp
+			if self.right is None:
+				temp = self.left
+				self = None
+				return temp
+
+			temp = self.get_min_node(self.right)
+			self.data = temp.data
+			self.right = self.right.remove(temp.data)
+		return self
+		
+
 	def preorder(self, l):
 		l.append(self.data)
 		if self.left:
@@ -74,6 +105,10 @@ class Tree:
 			return
 		return self.root.search(data)
 
+	def remove(self, data):
+		if self.root is not None:
+			return self.root.remove(data)
+
 	def preorder(self):
 		if self.root:
 			return self.root.preorder([])
@@ -92,51 +127,6 @@ class Tree:
 		else:
 			return []
 
-	def get_min_node(self, node):
-		current = node
-		current_parent = None
-		while current.left is not None:
-			current_parent = current
-			current = current.left
-			return current, current_parent
-
-	def get_max_node(self, node):
-		current = node
-		current_parent = None
-		while current.right is not None:
-			current_parent = current
-			current = current.right
-			return current, current_parent
-
-	def remove(self, data):
-
-		if self.root == None:
-			print("Empty tree")
-			return False
-
-		#Case 1: Deleting the Root Node
-		if self.root.data == data:
-			#Case 1.1: Root Node has no Child Node
-			if self.root.left is None and self.root.right is None:
-				self.root = None
-			
-			#Case 1.2: Root Node has left child only
-			elif self.root.left and self.root.right is None:
-				self.root = self.root.left
-			
-			#Case 1.3: Root Node has right child only
-			elif self.root.left is None and self.root.right:
-				self.root = self.root.right
-			
-			#Case 1.4 Root Node has both Children
-			elif self.root.left and self.root.right:
-				sub_right = self.root.right
-				min_node, min_node_parent = self.get_min_node(sub_right)
-				if min_node.right:
-					max_node, max_node_parent = get_max_node(min_node)
-
-				self.root.data = min_node.data
-				min_node_parent.left = None
 
 
 new_bst = Tree()
@@ -159,8 +149,13 @@ print(new_bst.preorder())
 print(new_bst.inorder())
 print(new_bst.postorder())
 
-#new_bst.remove(50)
-#snew_bst.remove(53)
-#new_bst.remove(55)
-#print(new_bst.inorder())
-print(new_bst.search(67))
+new_bst.remove(50)
+new_bst.remove(47)
+new_bst.remove(60)
+new_bst.remove(53)
+new_bst.remove(55)
+print("\n")
+print(new_bst.preorder())
+print(new_bst.inorder())
+print(new_bst.postorder())
+print(new_bst.search(37))
