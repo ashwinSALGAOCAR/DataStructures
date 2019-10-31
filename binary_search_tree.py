@@ -2,6 +2,7 @@
 
 class Node:
 
+	#Node Class constructor. Initialize the Node.
 	def __init__(self, data):
 		self.data = data
 		self.left = None
@@ -12,13 +13,13 @@ class Node:
 			return False
 		elif self.data > data:
 			if self.left:
-				self.left.insert(data)
+				return self.left.insert(data)
 			else:
 				self.left = Node(data)
 				return True
 		else:
 			if self.right:
-				self.right.insert(data)
+				return self.right.insert(data)
 			else:
 				self.right = Node(data)
 				return True
@@ -45,7 +46,7 @@ class Node:
 
 		if data < self.data:
 			self.left = self.left.remove(data)
-		elif data> self.data:
+		elif data > self.data:
 			self.right = self.right.remove(data)
 		else:
 			if self.left is None:
@@ -149,13 +150,10 @@ print(new_bst.preorder())
 print(new_bst.inorder())
 print(new_bst.postorder())
 
-new_bst.remove(50)
 new_bst.remove(47)
-new_bst.remove(60)
-new_bst.remove(53)
-new_bst.remove(55)
+
 print("\n")
 print(new_bst.preorder())
 print(new_bst.inorder())
 print(new_bst.postorder())
-print(new_bst.search(37))
+print(new_bst.search(47))
