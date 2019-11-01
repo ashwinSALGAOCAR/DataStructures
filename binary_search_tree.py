@@ -56,12 +56,12 @@ class Node:
 		else:
 			if self.left is None and self.right is None:
 				self = None
-			elif self.left is not None:
-				temp = self.GET_MAX_NODE(self)
+			elif self.left is not None and self.right is None:
+				temp = self.GET_MAX_NODE(self.left)
 				self.data = temp.data
 				self.left = self.left.remove(temp.data)
 			else:
-				temp = self.GET_MIN_NODE(self)
+				temp = self.GET_MIN_NODE(self.right)
 				self.data = temp.data
 				self.right = self.right.remove(temp.data)
 
