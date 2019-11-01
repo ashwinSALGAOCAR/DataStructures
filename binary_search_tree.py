@@ -33,34 +33,38 @@ class Node:
 			return self.right.search(data)
 		return "Node with value " + str(data) + " you're searching for not found"
 
-	def get_min_node(self, node):
+	def GET_MIN_NODE(self, node):
 		current = node
 		while current.left is not None:
 			current = current.left
 		return current
 
+	def GET_MAX_NODE(self, node):
+		current = node
+		while current.right is not None:
+			current = current.right
+		return current
 
 	def remove(self, data):
 		if self is None:
-			return False
+			return None
 
 		if data < self.data:
 			self.left = self.left.remove(data)
 		elif data > self.data:
 			self.right = self.right.remove(data)
 		else:
-			if self.left is None:
-				temp = self.right
+			if self.left is None and self.right is None:
 				self = None
-				return temp
-			if self.right is None:
-				temp = self.left
-				self = None
-				return temp
+			elif self.left is not None:
+				temp = self.GET_MAX_NODE(self)
+				self.data = temp.data
+				self.left = self.left.remove(temp.data)
+			else:
+				temp = self.GET_MIN_NODE(self)
+				self.data = temp.data
+				self.right = self.right.remove(temp.data)
 
-			temp = self.get_min_node(self.right)
-			self.data = temp.data
-			self.right = self.right.remove(temp.data)
 		return self
 		
 
