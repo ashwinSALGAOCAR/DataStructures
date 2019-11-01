@@ -128,29 +128,27 @@ class Tree:
 		else:
 			return []
 
+	def insert_nodes(self):
+		nums = int(input("Enter the number of nodes: "))
+		for i in range(nums):
+			node_data = int(input("Enter value of Node " + str(i + 1) + ": "))
+			self.insert(node_data)
+
+	def remove_nodes(self):
+		nums = int(input("Enter number of nodes to delete: "))
+		for i in range(nums):
+			node_data = int(input("Enter value to be removed in the tree: "))
+			self.remove(node_data)
 
 
 new_bst = Tree()
-new_bst.insert(50)
-new_bst.insert(40)
-new_bst.insert(60)
-new_bst.insert(35)
-new_bst.insert(33)
-new_bst.insert(37)
-new_bst.insert(45)
-new_bst.insert(47)
-new_bst.insert(43)
-new_bst.insert(55)
-new_bst.insert(65)
-new_bst.insert(53)
-new_bst.insert(57)
-new_bst.insert(63)
-new_bst.insert(67)
+
+new_bst.insert_nodes()
 print(new_bst.preorder())
 print(new_bst.inorder())
 print(new_bst.postorder())
 
-new_bst.remove(47)
+new_bst.remove_nodes()
 
 print("\n")
 print(new_bst.preorder())
