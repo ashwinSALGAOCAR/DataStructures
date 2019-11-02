@@ -59,8 +59,7 @@ class MaxHeap:
 
 		if length % 2 == 0 and 2 * i + 1 < length:
 			self.heap[i] = self.heap[2 * i + 1]
-			i = 2 * i + 1
-
+		
 		self.heap = self.heap[: -1]
 		
 	def print_heap(self):
@@ -73,6 +72,7 @@ new_heap.insert(25)
 new_heap.insert(2)
 new_heap.insert(13)
 new_heap.insert(34)
+new_heap.insert(1)
 new_heap.insert(47)
 new_heap.insert(5)
 new_heap.insert(88)
