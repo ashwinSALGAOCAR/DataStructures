@@ -5,6 +5,7 @@ class MaxHeap:
 
 	def __init__(self):
 		self.heap = []
+		self.sort_list = []
 
 	def insert(self, data):
 
@@ -46,15 +47,15 @@ class MaxHeap:
 		self.heap[0] = self.heap[- 1]
 		self.heap[- 1] = del_node
 
+		self.sort_list.append(del_node)
+
 		self.heap = self.heap[: -1]
 
 		length = len(self.heap)
+		if length == 0:
+			return
 		height = math.log(length)
 		i = h = 0
-
-		if height == 0:
-			self.heap[0] = ''
-			return
 
 		while h < height:
 			while 2 * i + 2 < length:
@@ -78,41 +79,13 @@ class MaxHeap:
 
 		if length % 2 == 0 and 2 * i + 1 < length:
 			if self.heap[2 * i + 1] > self.heap[i]:
+				temp = self.heap[i]
 				self.heap[i] = self.heap[2 * i + 1]
 				self.heap[2 * i + 1] = temp
-			else:
-				i = 2 * i + 1
 
 	def sort(self):
+		print("Heap Sort list: " + str(self.sort_list))
 
-		length = len(self.heap)
-		height = math.log(length)
-		i = h = 0
-		sort_list = []
-		for i in range(length):
-			while h < height:
-				while 2 * i + 2 < length:
-					temp = self.heap[i]
-					if self.heap[2 * i + 1] > self.heap[2 * i + 2]:
-						self.heap[i] = self.heap[2 * i + 1]
-						i = 2 * i + 1
-					else:
-						self.heap[i] = self.heap[2 * i + 2]
-						i = 2 * i + 2
-
-					self.heap[i] = temp
-
-				h = h + 1
-
-			if length % 2 == 0 and 2 * i + 1 < length:
-				self.heap[i] = self.heap[2 * i + 1]
-		
-			max_node = self.heap[-1]
-			sort_list.append(max_node)
-			print(max_node)
-			self.heap = self.heap[:-1]
-		print(sort_list)
-		
 	def insert_nodes(self):
 		nums = int(input("How many nodes do you need: "))
 		for i in range(nums):
@@ -135,4 +108,4 @@ new_heap.print_heap()
 
 new_heap.delete_nodes()
 new_heap.print_heap()
-#new_heap.sort()
+new_heap.sort()
