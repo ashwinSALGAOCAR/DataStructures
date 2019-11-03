@@ -42,6 +42,12 @@ class MaxHeap:
 		interchange the positions of the child and eliminate the parent.
 		'''
 
+		del_node = self.heap[0]
+		self.heap[0] = self.heap[- 1]
+		self.heap[- 1] = del_node
+
+		self.heap = self.heap[: -1]
+
 		length = len(self.heap)
 		height = math.log(length)
 		i = h = 0
@@ -50,30 +56,33 @@ class MaxHeap:
 			self.heap[0] = ''
 			return
 
-		del_node = self.heap[0]
-		self.heap[0] = self.heap[length - 1]
-		self.heap[length - 1] = del_node
-
-		self.heap = self.heap[: -1]
-
 		while h < height:
-			while 2 * i + 2 < length - 1:
+			while 2 * i + 2 < length:
 				temp = self.heap[i]
 				if self.heap[2 * i + 1] > self.heap[2 * i + 2]:
-					self.heap[i] = self.heap[2 * i + 1]
+					if self.heap[2 * i + 1] > self.heap[i]:
+						self.heap[i] = self.heap[2 * i + 1]
+					else:
+						self.heap[i] = temp
+						break
 					i = 2 * i + 1
-				else:
-					self.heap[i] = self.heap[2 * i + 2]
+				elif self.heap[2 * i + 2] > self.heap[2 * i + 1]:
+					if self.heap[2 * i + 2] > self.heap[i]:
+						self.heap[i] = self.heap[2 * i + 2]
+					else:
+						self.heap[i] = temp
+						break
 					i = 2 * i + 2
-
 				self.heap[i] = temp
-
 			h = h + 1
 
-		if length % 2 == 0 and 2 * i + 1 < length - 1:
-			temp = self.heap[i]
-			self.heap[i] = self.heap[2 * i + 1]
-		
+		if length % 2 == 0 and 2 * i + 1 < length:
+			if self.heap[2 * i + 1] > self.heap[i]:
+				self.heap[i] = self.heap[2 * i + 1]
+				self.heap[2 * i + 1] = temp
+			else:
+				i = 2 * i + 1
+
 	def sort(self):
 
 		length = len(self.heap)
@@ -104,36 +113,26 @@ class MaxHeap:
 			self.heap = self.heap[:-1]
 		print(sort_list)
 		
+	def insert_nodes(self):
+		nums = int(input("How many nodes do you need: "))
+		for i in range(nums):
+			data = int(input("Value of Node" + str(i + 1) +": "))
+			self.insert(data)
+
+	def delete_nodes(self):
+		nums = int(input("How many nodes to delete: "))
+		for i in range(nums):
+			self.delete()
+
 	def print_heap(self):
 		print(self.heap)
 		print("Length of Heap: " + str(len(self.heap)) + "\n")
 
 
 new_heap = MaxHeap()
-new_heap.insert(25)
-new_heap.insert(2)
-new_heap.insert(13)
-new_heap.insert(34)
-new_heap.insert(1)
-new_heap.insert(47)
-new_heap.insert(5)
-new_heap.insert(88)
-new_heap.insert(50)
-new_heap.insert(250)
-new_heap.insert(510)
-new_heap.insert(3)
-new_heap.insert(200)
-new_heap.insert(150)
-
+new_heap.insert_nodes()
 new_heap.print_heap()
 
-new_heap.delete()
-new_heap.delete()
-new_heap.delete()
-new_heap.delete()
-new_heap.delete()
-new_heap.delete()
-new_heap.delete()
-
+new_heap.delete_nodes()
 new_heap.print_heap()
 #new_heap.sort()
