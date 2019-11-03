@@ -27,14 +27,16 @@ class MaxHeap:
 				self.heap[parent_index - 1] = self.heap[child_index - 1]
 				self.heap[child_index - 1] = temp
 				child_index = parent_index
+
 			height = height - 1
 
 	def delete(self):
 
-		'''We begin from the top node. The node with the heighest value and traverse down
-		the height. We loop till we reach one less than the height. In the second loop we
-		untill both child nodes exist. In this loop we move the top node down untill it is
-		pushed to the end of the list and eliminated.
+		'''We begin from the top node. The node with the heighest value and replace it with
+		the last value of the heap and then traverse down the height. We loop till we reach
+		one less than the height. In the second loop we untill both child nodes exist. In 
+		this loop we move the top node down untill it is pushed to the end of the list and
+		eliminated.
 
 		If the node has only left child(even list length means it has only left child), we
 		interchange the positions of the child and eliminate the parent.
@@ -43,8 +45,19 @@ class MaxHeap:
 		length = len(self.heap)
 		height = math.log(length)
 		i = h = 0
+
+		if height == 0:
+			self.heap[0] = ''
+			return
+
+		del_node = self.heap[0]
+		self.heap[0] = self.heap[length - 1]
+		self.heap[length - 1] = del_node
+
+		self.heap = self.heap[: -1]
+
 		while h < height:
-			while 2 * i + 2 < length:
+			while 2 * i + 2 < length - 1:
 				temp = self.heap[i]
 				if self.heap[2 * i + 1] > self.heap[2 * i + 2]:
 					self.heap[i] = self.heap[2 * i + 1]
@@ -57,10 +70,39 @@ class MaxHeap:
 
 			h = h + 1
 
-		if length % 2 == 0 and 2 * i + 1 < length:
+		if length % 2 == 0 and 2 * i + 1 < length - 1:
+			temp = self.heap[i]
 			self.heap[i] = self.heap[2 * i + 1]
 		
-		self.heap = self.heap[: -1]
+	def sort(self):
+
+		length = len(self.heap)
+		height = math.log(length)
+		i = h = 0
+		sort_list = []
+		for i in range(length):
+			while h < height:
+				while 2 * i + 2 < length:
+					temp = self.heap[i]
+					if self.heap[2 * i + 1] > self.heap[2 * i + 2]:
+						self.heap[i] = self.heap[2 * i + 1]
+						i = 2 * i + 1
+					else:
+						self.heap[i] = self.heap[2 * i + 2]
+						i = 2 * i + 2
+
+					self.heap[i] = temp
+
+				h = h + 1
+
+			if length % 2 == 0 and 2 * i + 1 < length:
+				self.heap[i] = self.heap[2 * i + 1]
+		
+			max_node = self.heap[-1]
+			sort_list.append(max_node)
+			print(max_node)
+			self.heap = self.heap[:-1]
+		print(sort_list)
 		
 	def print_heap(self):
 		print(self.heap)
@@ -77,7 +119,9 @@ new_heap.insert(47)
 new_heap.insert(5)
 new_heap.insert(88)
 new_heap.insert(50)
-new_heap.insert(100)
+new_heap.insert(250)
+new_heap.insert(510)
+new_heap.insert(3)
 new_heap.insert(200)
 new_heap.insert(150)
 
@@ -88,5 +132,8 @@ new_heap.delete()
 new_heap.delete()
 new_heap.delete()
 new_heap.delete()
+new_heap.delete()
+new_heap.delete()
 
 new_heap.print_heap()
+#new_heap.sort()
