@@ -91,6 +91,12 @@ class MaxHeap:
 		length = len(self.heap)
 		if length == 0:
 			return
+		if length % 2 == 0:
+			parent_index = int(length / 2)
+			if self.heap[length - 1] > self.heap[parent_index - 1]:
+				temp = self.heap[parent_index - 1]
+				self.heap[parent_index - 1] = self.heap[length - 1]
+				self.heap[length - 1] = temp
 		i = length - 1
 		while i >= 0:
 			while 2*i + 2 < length:
@@ -111,6 +117,13 @@ class MaxHeap:
 					i = 2 * i + 2
 				self.heap[i] = temp
 			i = i - 1
+
+		if length % 2 == 0:
+			parent_index = int(length / 2)
+			if self.heap[length - 1] > self.heap[parent_index - 1]:
+				temp = self.heap[parent_index - 1]
+				self.heap[parent_index - 1] = self.heap[length - 1]
+				self.heap[length - 1] = temp
 
 	def insert_nodes(self):
 		nums = int(input("How many nodes do you need: "))
@@ -136,5 +149,5 @@ new_heap.delete_nodes()
 new_heap.print_heap()
 new_heap.sort()
 
-new_heap.heapify([13,72,53,4,95,66,70,100,1])
+new_heap.heapify([13,26, 52,104,1,2,3,4,208,89,92])
 new_heap.print_heap()
