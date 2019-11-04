@@ -20,7 +20,7 @@ class MaxHeap:
 		self.heap.append(data)
 		length = len(self.heap)
 		child_index = length
-		height = math.log(length)
+		height = math.log2(length + 1) - 1
 		while height > 0:
 			parent_index = int(child_index / 2)
 			if self.heap[child_index - 1] > self.heap[parent_index - 1]:
@@ -54,7 +54,7 @@ class MaxHeap:
 		length = len(self.heap)
 		if length == 0:
 			return
-		height = math.log(length)
+		height = math.log2(length + 1) - 1
 		i = h = 0
 
 		while h < height:
@@ -91,7 +91,7 @@ class MaxHeap:
 		length = len(self.heap)
 		if length == 0:
 			return
-		height = math.log(length)
+		height = math.log2(length + 1) - 1
 		h, i = height, length - 1
 		while h >= 0:
 			temp = self.heap[i]
