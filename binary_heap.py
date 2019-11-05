@@ -19,14 +19,14 @@ class MaxHeap:
 
 		self.heap.append(data)
 		length = len(self.heap)
-		child_index = length
+		child_index = length - 1
 		height = math.log2(length + 1) - 1
 		while height > 0:
-			parent_index = int(child_index / 2)
-			if self.heap[child_index - 1] > self.heap[parent_index - 1]:
-				temp = self.heap[parent_index - 1]
-				self.heap[parent_index - 1] = self.heap[child_index - 1]
-				self.heap[child_index - 1] = temp
+			parent_index = int((child_index - 1) / 2)
+			if self.heap[child_index] > self.heap[parent_index]:
+				temp = self.heap[parent_index]
+				self.heap[parent_index] = self.heap[child_index]
+				self.heap[child_index] = temp
 				child_index = parent_index
 
 			height = height - 1
@@ -149,5 +149,5 @@ new_heap.delete_nodes()
 new_heap.print_heap()
 new_heap.sort()
 
-new_heap.heapify([13,26, 52,104,1,2,3,4,208,89,92])
+new_heap.heapify([13,26,52,104,1,2,3,4,208,89,92])
 new_heap.print_heap()
