@@ -92,6 +92,14 @@ class MaxHeap:
 		if length == 0:
 			return
 		i = length - 1
+
+		if length % 2 == 0:
+			parent_index = int((i - 1) / 2)
+			if self.heap[i] > self.heap[parent_index]:
+				temp = self.heap[parent_index]
+				self.heap[parent_index] = self.heap[i]
+				self.heap[i] = temp
+
 		while i >= 0:
 			while 2*i + 2 < length:
 				temp = self.heap[i]
@@ -112,6 +120,7 @@ class MaxHeap:
 				self.heap[i] = temp
 			i = i - 1
 
+		i = length - 1
 		if length % 2 == 0:
 			parent_index = int((i - 1) / 2)
 			if self.heap[i] > self.heap[parent_index]:
