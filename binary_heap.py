@@ -130,6 +130,15 @@ class MaxHeap:
 		for i in range(nums):
 			self.delete()
 
+	def create_list(self):
+		tree = []
+		nums = int(input("How many nodes do you need: "))
+		for i in range(nums):
+			value = int(input("Value of Node" + str(i + 1) +": "))
+			tree.append(value)
+		print(tree)
+		return tree
+
 	def print_heap(self):
 		print(self.heap)
 		print("Length of Heap: " + str(len(self.heap)) + "\n")
@@ -143,5 +152,6 @@ new_heap.delete_nodes()
 new_heap.print_heap()
 new_heap.sort()
 
-new_heap.heapify([13,26,52,104,1,2,3,4,208,89,92])
+tree = new_heap.create_list()
+new_heap.heapify(tree)
 new_heap.print_heap()
