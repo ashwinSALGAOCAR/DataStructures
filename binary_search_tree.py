@@ -92,6 +92,14 @@ class Node:
 		l.append(self.data)
 		return l
 
+	def reverse_inorder(self, l):
+		if self.right:
+			self.right.reverse_inorder(l)
+		l.append(self.data)
+		if self.left:
+			self.left.reverse_inorder(l)
+		return l
+
 
 class Tree:
 
@@ -132,6 +140,10 @@ class Tree:
 		else:
 			return []
 
+	def reverse_inorder(self):
+		if self.root:
+			return self.root.reverse_inorder([])
+
 	def insert_nodes(self):
 		nums = int(input("Enter the number of nodes: "))
 		for i in range(nums):
@@ -151,6 +163,7 @@ new_bst.insert_nodes()
 print(new_bst.preorder())
 print(new_bst.inorder())
 print(new_bst.postorder())
+print(new_bst.reverse_inorder())
 
 new_bst.remove_nodes()
 
@@ -158,4 +171,5 @@ print("\n")
 print(new_bst.preorder())
 print(new_bst.inorder())
 print(new_bst.postorder())
+print(new_bst.reverse_inorder())
 print(new_bst.search(47))
