@@ -6,7 +6,7 @@ class Vertex:
 		self.adjacent = {}
 
 	def __str__(self):
-		return str(self.id) + 'adjacent: ' + str([x.id for x in self.adjacent])
+		return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
 
 	def add_neighbor(self, neighbor, weight = 0):
 		self.adjacent[neighbor] = weight
