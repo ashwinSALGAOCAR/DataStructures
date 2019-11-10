@@ -23,4 +23,4 @@ if __name__ == '__main__':
 			print(vid, wid, v.get_weight(w))
 
 	for v in g:
-		print(g.vert_dict[v.get_id()])
+		print("g.vert_dict[" + v.get_id() + "]= " + str(g.vert_dict[v.get_id()]))
