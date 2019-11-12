@@ -6,6 +6,9 @@ class Vertex:
 		self.adjacent = {}
 
 	def __str__(self):
+
+		'''Printing the Vertex_Object will cause this method to be invoked.'''
+
 		return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
 
 	def add_neighbor(self, neighbor, weight = 0):
