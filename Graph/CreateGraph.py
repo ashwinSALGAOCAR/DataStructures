@@ -2,7 +2,16 @@ from CreateVertex import Vertex
 
 class Graph:
 
+	'''Adjacency list implementation: We maintain the master list of all
+	the vertices in the Graph object and each vertex object in the graph
+	stores a list of vertices that it is connected to.
+	'''
+
 	def __init__(self):
+
+		'''vert_dict : Dictionary with keys = Node and Value = Vertex_Object.
+		vert_dict[Node] = Vertex_Object
+		'''
 
 		self.vert_dict = {}
 		self.num_vertices = 0
